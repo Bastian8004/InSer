@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+              <h1 class="title-single">Usługi/produkty</h1>
+              <br>
+              {% if user.is_authenticated %}
+              <button onclick="window.location.href='{% url 'usluga_new' %}'" class="btn btn-primary">Dodaj usługe/produkt</button>
+              {% endif %}
+              {% for usluga in uslugas %}
+              <br>
+              <table>
+	            <tr>
+                    <th>Lp</th>
+                    <th>Nazwa</th>
+                    <th>Jednostka</th>
+                    <th>Cena netto</th>
+                    <th>Stawka VAT</th>
+                    <th>Edycja</th>
+                </tr>
+	            <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ usluga.nazwa }}</td>
+                    <td>{{ usluga.jednostka }}</td>
+                    <td>{{ usluga.cena_netto }}</td>
+                    <td>{{ usluga.stawka_VAT }}</td>
+                    <td><button onclick="window.location.href='{% url 'usluga_edit' pk=kategoria.pk %}'" class="btn btn-primary">Edycja</button></td>
+                </tr>
+              </table>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

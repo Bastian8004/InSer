@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+              <h3>Imie i nazwisko: <i>{{ klient.nabywca}}</i></h3>
+              <h3>Ulica: <i>{{ klient.ulica}}</i></h3>
+              <h3>Miasto: <i>{{ klient.miasto}}</i></h3>
+              <h3>Telefon: <i>{{ klient.nrTel}}</i></h3>
+              <h3>Email: <i>{{ klient.Email}}</i></h3>
+              <h3>NIP: <i>{{ klient.NIP}}</i></h3>
+              <h3>Rabat: <i>{{ klient.rabat}}%</i></h3>
+              <h6>Data utworzenia klienta: <i>{{ klient.created_date }}</i></h6>
+              <br>
+              <button onclick="window.location.href='{% url 'klient_edit' pk=klient.pk %}'" class="btn btn-primary">Edytuj klienta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

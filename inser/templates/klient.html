@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+              <h1 class="title-single">Klienci</h1>
+              <br>
+              {% if user.is_authenticated %}
+              <button onclick="window.location.href='{% url 'klient_new' %}'" class="btn btn-primary">Dodaj klienta</button>
+              {% endif %}
+              {% for klient in klients %}
+              <br>
+              <table>
+	            <tr>
+                    <th>Lp</th>
+                    <th>Imie i nazwisko</th>
+                    <th>Szczegóły</th>
+                </tr>
+	            <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ klient.nabywca }}</td>
+                    <td><button onclick="window.location.href='{% url 'klient_detail' pk=klient.pk %}'" class="btn btn-primary">Szczegóły</button></td>
+                </tr>
+              </table>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

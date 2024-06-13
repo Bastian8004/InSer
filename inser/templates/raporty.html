@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+              <h1 class="title-single">Faktury</h1>
+              <br>
+              {% for faktura in fakturas %}
+              {% if user.is_authenticated %}
+              <button onclick="window.location.href='{% url 'faktura_new' %}'" class="btn btn-primary">Stwórz fakture</button>
+              {% endif %}
+              <br>
+              <table>
+	            <tr>
+                    <td><button onclick="window.location.href='{% url 'faktura_detail' pk=faktura.pk %}'" class="btn btn-primary">Miesięczny</button></td>
+                    <td><button onclick="window.location.href='{% url 'faktura_detail' pk=faktura.pk %}'" class="btn btn-primary">Roczny</button></td>
+                </tr>
+              </table>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

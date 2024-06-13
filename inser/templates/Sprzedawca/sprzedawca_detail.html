@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+              <h1>{{ sprzedawca.sprzedawca}}</h1>
+              <h3>Pracownik: <i>{{ sprzedawca.pracownik}}</i></h3>
+              <h3>Ulica: <i>{{ sprzedawca.ulica}}</i></h3>
+              <h3>Miasto: <i>{{ sprzedawca.miasto}}</i></h3>
+              <h3>Telefon: <i>{{ sprzedawca.nrTel}}</i></h3>
+              <h3>Email: <i>{{ sprzedawca.Email}}</i></h3>
+              <h3>NIP: <i>{{ sprzedawca.NIP}}</i></h3>
+              <h3>Numer konta: <i>{{ sprzedawca.nrKonta}}</i></h3>
+              <h6>Data utworzenia pracownika: <i>{{ sprzedawca.created_date }}</i></h6>
+              <br>
+              <button onclick="window.location.href='{% url 'sprzedawca_edit' pk=sprzedawca.pk %}'" class="btn btn-primary">Edytuj pracownika</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

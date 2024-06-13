@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+              <h1 class="title-single">Kategorie</h1>
+              <br>
+              {% if user.is_authenticated %}
+              <button onclick="window.location.href='{% url 'kategoria_new' %}'" class="btn btn-primary">Dodaj kategorie</button>
+              {% endif %}
+              {% for kategoria in kategories %}
+              <br>
+              <table>
+	            <tr>
+                    <th>Lp</th>
+                    <th>Kategoria</th>
+                    <th>Szczegóły</th>
+                    <th>Edycja</th>
+                </tr>
+	            <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ kategoria.nazwa }}</td>
+                    <td><button onclick="window.location.href='{% url 'uslugi' pk=kategoria.pk %}'" class="btn btn-primary">Szczegóły</button></td>
+                    <td><button onclick="window.location.href='{% url 'kategoria_edit' pk=kategoria.pk %}'" class="btn btn-primary">Edycja</button></td>
+                </tr>
+              </table>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

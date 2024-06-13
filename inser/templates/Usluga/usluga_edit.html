@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+              <h1 class="title-single">Edytuj usługe/produkt</h1>
+              <br>
+              <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <button type="submit">Zapisz zmiany</button>
+              </form>
+              <a href="http://127.0.0.1:8000/uslugi/<int:pk>/">Powrót do listy usług/produktów</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
