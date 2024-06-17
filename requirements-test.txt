@@ -1,6 +1,0 @@
-django
-django-wkhtmltopdf
-tox
-flake8
-pytest-django
-coverage
