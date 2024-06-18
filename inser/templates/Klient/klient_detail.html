@@ -17,6 +17,13 @@
               <h6>Data utworzenia klienta: <i>{{ klient.created_date }}</i></h6>
               <br>
               <button onclick="window.location.href='{% url 'klient_edit' pk=klient.pk %}'" class="btn btn-primary">Edytuj klienta</button>
+              <form action="{% url 'klient_delete' pk=klient.pk %}" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Usuń klienta</button>
+              </form>
+              <br>
+              <br>
+              <button onClick="history.back();" class="btn btn-primary">Powrót  do listy klientów</button>
           </div>
         </div>
       </div>

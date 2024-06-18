@@ -12,9 +12,12 @@
               <form method="post" enctype="multipart/form-data">
                   {% csrf_token %}
                   {{ form.as_p }}
-                  <button type="submit">Zapisz zmiany</button>
+                  <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
               </form>
-              <a href="http://127.0.0.1:8000/uslugi/<int:pk>/">Powrót do listy usług/produktów</a>
+              <a href="{% url 'usluga_delete' pk=usluga.pk %}" class="btn btn-danger">Usuń usługe/produkt</a>
+              <br>
+              <br>
+              <button onClick="history.back();" class="btn btn-primary">Powrót do listy usług/produktów</button>
           </div>
         </div>
       </div>

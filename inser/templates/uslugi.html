@@ -12,7 +12,7 @@
               {% if user.is_authenticated %}
               <button onclick="window.location.href='{% url 'usluga_new' %}'" class="btn btn-primary">Dodaj usługe/produkt</button>
               {% endif %}
-              {% for usluga in uslugas %}
+              <br>
               <br>
               <table>
 	            <tr>
@@ -21,18 +21,27 @@
                     <th>Jednostka</th>
                     <th>Cena netto</th>
                     <th>Stawka VAT</th>
+                    <th>Cena brutto</th>
                     <th>Edycja</th>
                 </tr>
+                  {% for usluga in uslugas %}
 	            <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ usluga.nazwa }}</td>
                     <td>{{ usluga.jednostka }}</td>
-                    <td>{{ usluga.cena_netto }}</td>
-                    <td>{{ usluga.stawka_VAT }}</td>
-                    <td><button onclick="window.location.href='{% url 'usluga_edit' pk=kategoria.pk %}'" class="btn btn-primary">Edycja</button></td>
+                    <td>{{ usluga.cena_netto }}PLN</td>
+                    <td>{{ usluga.stawka_VAT }}%</td>
+                    <td>{{ usluga.cena_brutto }}PLN</td>
+                    <td><button onclick="window.location.href='{% url 'usluga_edit' pk=usluga.pk %}'" class="btn btn-primary">Edycja</button></td>
                 </tr>
+                  {% endfor %}
               </table>
-              {% endfor %}
+              <br>
+              {% if user.is_authenticated %}
+              <button onclick="window.location.href='{% url 'kategorie' %}'" class="btn btn-primary">Powrót do listy kategorii</button>
+              {% endif %}
+              <br>
+
           </div>
         </div>
       </div>

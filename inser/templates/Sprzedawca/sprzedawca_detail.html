@@ -18,6 +18,14 @@
               <h6>Data utworzenia pracownika: <i>{{ sprzedawca.created_date }}</i></h6>
               <br>
               <button onclick="window.location.href='{% url 'sprzedawca_edit' pk=sprzedawca.pk %}'" class="btn btn-primary">Edytuj pracownika</button>
+              <form action="{% url 'sprzedawca_delete' pk=sprzedawca.pk %}" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Usuń pracownika</button>
+              </form>
+              <br>
+              <br>
+              <button onClick="history.back();" class="btn btn-primary">Powrót do listy sprzedawców</button>
+
           </div>
         </div>
       </div>

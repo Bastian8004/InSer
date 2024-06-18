@@ -12,7 +12,7 @@
               {% if user.is_authenticated %}
               <button onclick="window.location.href='{% url 'kategoria_new' %}'" class="btn btn-primary">Dodaj kategorie</button>
               {% endif %}
-              {% for kategoria in kategories %}
+
               <br>
               <table>
 	            <tr>
@@ -21,14 +21,16 @@
                     <th>Szczegóły</th>
                     <th>Edycja</th>
                 </tr>
+                  {% for kategoria in kategories %}
 	            <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ kategoria.nazwa }}</td>
                     <td><button onclick="window.location.href='{% url 'uslugi' pk=kategoria.pk %}'" class="btn btn-primary">Szczegóły</button></td>
                     <td><button onclick="window.location.href='{% url 'kategoria_edit' pk=kategoria.pk %}'" class="btn btn-primary">Edycja</button></td>
                 </tr>
+                  {% endfor %}
               </table>
-              {% endfor %}
+
           </div>
         </div>
       </div>

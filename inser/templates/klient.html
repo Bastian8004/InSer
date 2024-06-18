@@ -12,7 +12,6 @@
               {% if user.is_authenticated %}
               <button onclick="window.location.href='{% url 'klient_new' %}'" class="btn btn-primary">Dodaj klienta</button>
               {% endif %}
-              {% for klient in klients %}
               <br>
               <table>
 	            <tr>
@@ -20,13 +19,14 @@
                     <th>Imie i nazwisko</th>
                     <th>Szczegóły</th>
                 </tr>
+                  {% for klient in klients %}
 	            <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ klient.nabywca }}</td>
                     <td><button onclick="window.location.href='{% url 'klient_detail' pk=klient.pk %}'" class="btn btn-primary">Szczegóły</button></td>
                 </tr>
+                  {% endfor %}
               </table>
-              {% endfor %}
           </div>
         </div>
       </div>

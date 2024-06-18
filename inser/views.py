@@ -1,7 +1,11 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
+from django.urls import reverse
+from django.forms import formset_factory
 from .forms import KategoriaForm, KlientForm, PracownikForm, UslugaForm, FakturaForm
 from .models import Klient, Kategorie, Pracownik, Usluga, Faktura, Start
+from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 
 # Widok startowy
 def start(request):
@@ -27,7 +31,7 @@ def kategoria_new(request):
             kategoria = form.save(commit=False)
             kategoria.published_date = timezone.now()
             kategoria.save()
-            return redirect('kategorie', pk=kategoria.pk)
+            return redirect('kategorie')
     else:
         form = KategoriaForm()
     return render(request, 'Kategoria/kategoria_new.html', {'form': form})
@@ -41,10 +45,15 @@ def kategoria_edit(request, pk):
             kategoria = form.save(commit=False)
             kategoria.published_date = timezone.now()
             kategoria.save()
-            return redirect('kategorie', pk=kategoria.pk)
+            return redirect('kategorie')
     else:
         form = KategoriaForm(instance=kategoria)
-    return render(request, 'Kategoria/kategoria_edit.html', {'form': form})
+    return render(request, 'Kategoria/kategoria_edit.html', {'form': form, 'kategoria': kategoria})
+
+def kategoria_delete(request, pk):
+    kategoria = get_object_or_404(Kategorie, pk=pk)
+    kategoria.delete()
+    return redirect(reverse('kategorie'))
 
 # Widok tworzenia nowej usługi
 def usluga_new(request):
@@ -68,10 +77,15 @@ def usluga_edit(request, pk):
             usluga = form.save(commit=False)
             usluga.published_date = timezone.now()
             usluga.save()
-            return redirect('uslugi', pk=usluga.pk)
+            return redirect('uslugi', pk=usluga.category.pk)
     else:
         form = UslugaForm(instance=usluga)
-    return render(request, 'Usluga/usluga_edit.html', {'form': form})
+    return render(request, 'Usluga/usluga_edit.html', {'form': form, 'usluga': usluga})
+
+def usluga_delete(request, pk):
+    usluga = get_object_or_404(Usluga, pk=pk)
+    usluga.delete()
+    return redirect('uslugi', pk=usluga.category.pk)
 
 # Widok klientów
 def klient(request):
@@ -110,6 +124,11 @@ def klient_edit(request, pk):
         form = KlientForm(instance=klient)
     return render(request, 'Klient/klient_edit.html', {'form': form})
 
+def klient_delete(request, pk):
+    klient = get_object_or_404(Klient, pk=pk)
+    klient.delete()
+    return redirect(reverse('klient'))
+
 # Widok sprzedawców
 def sprzedawca(request):
     sprzedawcas = Pracownik.objects.all().order_by('-published_date')
@@ -147,6 +166,11 @@ def sprzedawca_edit(request, pk):
         form = PracownikForm(instance=sprzedawca)
     return render(request, 'Sprzedawca/sprzedawca_edit.html', {'form': form})
 
+def sprzedawca_delete(request, pk):
+    sprzedawca = get_object_or_404(Pracownik, pk=pk)
+    sprzedawca.delete()
+    return redirect(reverse('sprzedawca'))
+
 # Widok faktur
 def faktura(request):
     fakturas = Faktura.objects.all().order_by('-published_date')
@@ -183,3 +207,14 @@ def faktura_edit(request, pk):
     else:
         form = FakturaForm(instance=faktura)
     return render(request, 'Faktura/faktura_edit.html', {'form': form})
+
+def load_uslugi(request, category_id):
+    uslugi = Usluga.objects.filter(category_id=category_id)
+    options = list(uslugi.values('id', 'nazwa'))
+    return JsonResponse(options, safe=False)
+
+def fakrura_delete(request, pk):
+    faktura = get_object_or_404(Faktura, pk=pk)
+    faktura.delete()
+    return redirect(reverse('faktura'))
+

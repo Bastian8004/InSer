@@ -9,7 +9,6 @@
           <div class="title-single-box">
               <h1 class="title-single">Faktury</h1>
               <br>
-              {% for faktura in fakturas %}
               {% if user.is_authenticated %}
               <button onclick="window.location.href='{% url 'faktura_new' %}'" class="btn btn-primary">Stwórz fakture</button>
               {% endif %}
@@ -22,13 +21,14 @@
                     <th>Szczegóły</th>
                 </tr>
 	            <tr>
+                    {% for faktura in fakturas %}
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ faktura.create_date }}</td>
+                    <td>{{ faktura.created_date }}</td>
                     <td>{{ faktura.nabywca }}</td>
                     <td><button onclick="window.location.href='{% url 'faktura_detail' pk=faktura.pk %}'" class="btn btn-primary">Szczegóły</button></td>
                 </tr>
+                  {% endfor %}
               </table>
-              {% endfor %}
           </div>
         </div>
       </div>

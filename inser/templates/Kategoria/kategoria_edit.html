@@ -12,9 +12,15 @@
               <form method="post" enctype="multipart/form-data">
                   {% csrf_token %}
                   {{ form.as_p }}
-                  <button type="submit">Zapisz zmiany</button>
+                  <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
               </form>
-              <a href="http://127.0.0.1:8000/kategoria/">Powrót do listy kategorii</a>
+              <form action="{% url 'kategoria_delete' pk=kategoria.pk %}" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Usuń kategorię</button>
+              </form>
+              <br>
+              <br>
+              <button onClick="history.back();" class="btn btn-primary">Powrót do listy kategorii</button>
           </div>
         </div>
       </div>

@@ -12,9 +12,9 @@
               <form method="post" enctype="multipart/form-data">
                   {% csrf_token %}
                   {{ form.as_p }}
-                  <button type="submit">Dodaj klienta</button>
+                  <button type="submit" class="btn btn-primary">Dodaj klienta</button>
               </form>
-              <a href="http://127.0.0.1:8000/klient/">Powrót do listy klientów</a>
+              <button onClick="history.back();" class="btn btn-primary">Powrót do listy klientów</button>
           </div>
         </div>
       </div>
